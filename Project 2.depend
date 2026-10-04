@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1790928421 source:e:\dong-a\third semester\coding\project 2\main.cpp
+	<iostream>
+	<vector>
+	<cmath>
+	<iomanip>
+	<fstream>
+	<cstdlib>
+	<algorithm>
+

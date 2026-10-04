@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Linear Regression Visualizer</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+  body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f2f5; margin: 30px; display: flex; flex-direction: column; align-items: center; }
+  .container { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; width: 100%; max-width: 1200px; }
+  .card { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); flex: 1; min-width: 450px; max-width: 550px; }
+  h2 { text-align: center; color: #1e293b; margin-bottom: 5px; font-size: 20px; }
+  p { text-align: center; color: #64748b; font-size: 13px; margin-bottom: 15px; }
+</style>
+</head>
+<body>
+<h1 style="color: #0f172a; margin-bottom: 25px;">Linear Regression Dashboard</h1>
+<div class="container">
+  <div class="card">
+    <h2>Positive Correlation</h2>
+    <p><b>Equation:</b> Y = 6.1310 * X + (46.0357) | <b>R²:</b> 0.9980</p>
+    <canvas id="posChart"></canvas>
+  </div>
+  <div class="card">
+    <h2>Negative Correlation</h2>
+    <p><b>Equation:</b> Y = -4.0952 * X + (38.4286) | <b>R²:</b> 0.9977</p>
+    <canvas id="negChart"></canvas>
+  </div>
+</div>
+<script>
+function createRegressionChart(canvasId, rawData, lineData, pointColor, lineColor) {
+  new Chart(document.getElementById(canvasId).getContext('2d'), {
+    type: 'scatter',
+    data: {
+      datasets: [
+        { label: 'Data Points', data: rawData, backgroundColor: pointColor, pointRadius: 6 },
+        { label: 'Fit Line', data: lineData, type: 'line', borderColor: lineColor, borderWidth: 3, fill: false, pointRadius: 0 }
+      ]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        x: { title: { display: true, text: 'X Axis' } },
+        y: { title: { display: true, text: 'Y Axis' } }
+      }
+    }
+  });
+}
+
+const posData = [{x: 1.0000, y: 52.0000}, {x: 2.0000, y: 58.0000}, {x: 3.0000, y: 65.0000}, {x: 4.0000, y: 70.0000}, {x: 5.0000, y: 78.0000}, {x: 6.0000, y: 82.0000}, {x: 7.0000, y: 89.0000}, {x: 8.0000, y: 95.0000}];
+const posLine = [{x: 1.0000, y: 52.1667}, {x: 8.0000, y: 95.0833}];
+createRegressionChart('posChart', posData, posLine, '#2563eb', '#1d4ed8');
+
+const negData = [{x: 1.0000, y: 35.0000}, {x: 2.0000, y: 30.0000}, {x: 3.0000, y: 26.0000}, {x: 4.0000, y: 22.0000}, {x: 5.0000, y: 17.0000}, {x: 6.0000, y: 14.0000}, {x: 7.0000, y: 10.0000}, {x: 8.0000, y: 6.0000}];
+const negLine = [{x: 1.0000, y: 34.3333}, {x: 8.0000, y: 5.6667}];
+createRegressionChart('negChart', negData, negLine, '#dc2626', '#b91c1c');
+</script>
+</body>
+</html>
